@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: attendfr-backend
+    runtime: python
+    region: oregon
+    plan: free
+    branch: main
+    buildCommand: bash build.sh
+    startCommand: gunicorn attendance_fr.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    healthCheckPath: /api/health/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DB_ENGINE
+        value: django.db.backends.mysql
+      - key: DB_PORT
+        value: "4000"
+      - key: DB_USE_SSL
+        value: "True"
+      - key: DB_HOST
+        sync: false
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: FACE_RECOGNITION_TOLERANCE
+        value: "0.5"
+      - key: LATE_THRESHOLD_MINUTES
+        value: "15"

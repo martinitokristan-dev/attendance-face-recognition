@@ -1,0 +1,17 @@
+# MariaDB 11 configuration for AttendFR
+# Runs on port 3307 to co-exist with XAMPP (port 3306)
+# Location: C:\Program Files\MariaDB 11.0\data\my.ini  (or wherever MariaDB installs)
+#
+# AFTER INSTALL:
+#   1. Stop the MariaDB service (Services app or: net stop MariaDB)
+#   2. Edit C:\Program Files\MariaDB 11.0\data\my.ini  and set port=3307
+#   3. Restart service: net start MariaDB
+#   4. Create the database (see below)
+
+[mysqld]
+port = 3307
+character-set-server = utf8mb4
+collation-server     = utf8mb4_unicode_ci
+
+[client]
+port = 3307
